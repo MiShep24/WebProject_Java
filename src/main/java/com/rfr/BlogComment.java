@@ -21,6 +21,17 @@ public class BlogComment {
         this.isMy = uid == my_uid;
     }
 
+    public BlogComment(int id, int pid, int uid, String text, String date, User owner, Post blogPost, int my_uid) {
+        this.id = id;
+        this.pid = pid;
+        this.uid = uid;
+        this.text = text;
+        this.date = date;
+        this.owner = owner;
+        this.isOrganizer = blogPost.getUid() == uid;
+        this.isMy = uid == my_uid;
+    }
+
     public int getId() {
         return id;
     }

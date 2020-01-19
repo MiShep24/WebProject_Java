@@ -42,6 +42,13 @@ public class Post {
         members.add(uid);
     }
 
+    public Post(int pid, int uid, String name) {
+        this.pid = pid;
+        this.uid = uid;
+        this.name = name;
+
+    }
+
     public int getPid() {
         return pid;
     }

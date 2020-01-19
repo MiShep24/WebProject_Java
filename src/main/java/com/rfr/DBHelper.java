@@ -550,7 +550,7 @@ public class DBHelper implements Closeable {
         return new ArrayList<>();
     }
 
-    public BlogPost geBlogPost(int pid) {
+    public BlogPost getBlogPost(int pid) {
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM blog_posts where id = ?;");
             st.setInt(1, pid);
@@ -561,6 +561,23 @@ public class DBHelper implements Closeable {
             return new BlogPost(resultSet.getInt("uid"), pid,
                     resultSet.getString("title"), resultSet.getString("text_com"),
                     resultSet.getString("photo_post"), getBlogPostLikesCount(pid));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Post getPost(int pid) {
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT * FROM posts where pid = ?;");
+            st.setInt(1, pid);
+            ResultSet resultSet = st.executeQuery();
+
+            resultSet.next();
+
+            return new Post(pid, resultSet.getInt("uid"),
+                    resultSet.getString("name"));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -623,7 +640,7 @@ public class DBHelper implements Closeable {
         HashMap<String, Object> response = new HashMap<>();
 
         try {
-            BlogPost blogPost = geBlogPost(pid);
+            BlogPost blogPost = getBlogPost(pid);
             String title = blogPost.getTitle();
             PreparedStatement st = connection.prepareStatement("SELECT * FROM comments_blog WHERE pid = ?;");
             st.setInt(1, pid);
@@ -669,8 +686,8 @@ public class DBHelper implements Closeable {
         HashMap<String, Object> response = new HashMap<>();
 
         try {
-            BlogPost blogPost = geBlogPost(pid);
-            String title = blogPost.getTitle();
+            Post post = getPost(pid);
+            String title = post.getName();
             PreparedStatement st = connection.prepareStatement("SELECT * FROM comments WHERE pid = ?;");
             st.setInt(1, pid);
             ResultSet resultSet = st.executeQuery();
@@ -683,7 +700,7 @@ public class DBHelper implements Closeable {
                 user.setBirthday(null);
                 user.setPassworduser(null);
                 user.setEmailuser(null);
-                blogComments.add(new BlogComment(resultSet.getInt("id"), pid, uid, text, date, user, blogPost, my_uid));
+                blogComments.add(new BlogComment(resultSet.getInt("id"), pid, uid, text, date, user, post, my_uid));
             }
             response.put("title", title);
             response.put("comments", blogComments);

@@ -10,7 +10,7 @@ $.ajax({
     data: {token: $.cookie('token'), pid: pid},
     success: function (jqXHR, textStatus, errorThrown) {
         console.log(jqXHR);
-        const comments_container = document.getElementById("comments_container")
+        const comments_container = document.getElementById("comments_container");
         let html = "";
         document.getElementById("title").innerHTML = "Чат \"" + jqXHR.title + "\"";
         for (let i = 0; i < jqXHR.comments.length; i++) {
