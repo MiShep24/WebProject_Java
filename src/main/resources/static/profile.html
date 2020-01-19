@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="./scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./scripts/profile.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #D3E7E9;
+        }
+
+        .colorNav {
+            background-color: #009999;
+        }
+
+        .colorFont {
+            color: #dddddd;
+        }
+
+        .photoAvatar {
+            width: 200px;
+            height: 200px;
+            outline: 0px solid #000;
+            border: 3px solid #fff;
+            border-radius: 20px;
+        }
+
+        .divPhoto {
+            padding: 10px;
+            background-color: #fafafa;
+            width: 220px;
+            height: 250px;
+            margin-top: 50px;
+            margin-left: 170px;
+        }
+
+        .changePhoto {
+            margin-left: 40px;
+            margin-top: 5px;
+            background-color: #fafafa;
+            border-radius: 10px;
+        }
+
+        .divInfo {
+            width: 700px;
+            height: 100%;
+            background-color: #fafafa;
+            margin-top: -260px;
+            margin-left: 400px;
+        }
+
+        .fontFIO {
+            font-size: 24px;
+            font-family: Tahoma;
+            font-weight: bold;
+        }
+
+        .divTitleInfo {
+            margin-left: 15px;
+        }
+
+        h3 {
+            color: #86989B;
+            font-size: 14px;
+        }
+
+        table {
+            margin-top: 10px;
+            margin-left: 15px;
+        }
+
+        .divButton {
+            width: 930px;
+            height: 30px;
+            margin-left: 170px;
+            margin-top: 10px;
+            background-color: #fafafa;
+        }
+
+        .createPost {
+            margin-top: 5px;
+            margin-left: 430px;
+            color: #3B666B;
+            font-size: 18px;
+        }
+
+        .divPost {
+            background-color: #fafafa;
+            width: 600px;
+            height: 120%;
+            margin-left: 370px;
+            margin-top: 15px;
+            border: solid 1px black;
+        }
+
+        .sendRequest {
+            background-color: #5200a5;
+            color: white;
+            margin-top: 10px;
+            margin-left: 15px;
+            border-radius: 10px;
+        }
+
+        .divLike {
+            border: solid 1px black;
+            width: 299px;
+            height: 30px;
+            margin-top: 10px;
+        }
+
+        .divComment {
+            border: solid 1px black;
+            width: 299px;
+            height: 30px;
+            margin-left: 299px;
+            margin-top: -30px;
+        }
+
+        .members {
+            margin-left: 450px;
+            margin-top: -20px;
+        }
+    </style>
+</head>
+<body>
+<nav class="colorNav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./profile.html"><b class="colorFont">Моя страница</b></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="all_competitions.html" class="colorFont">Соревнования <span class="sr-only">(current)</span></a>
+                </li>
+                <li><a href="./my_competitions.html" class="colorFont">Мои соревнования</a></li>
+                <li><a href="./blog_post.html" class="colorFont">Блог</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" title="Введите фамилию спортсмена, которого хотите найти" class="form-control"
+                           placeholder="Введите фамилию">
+                </div>
+                <button type="submit" class="btn btn-default">Найти</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="colorFont" onclick="logout()">Выход</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./refactor_profile.html" class="colorFont">Редактировать профиль</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div>
+    <div class="divPhoto">
+        <img src="" class="photoAvatar">
+        <!-- <button (click)="fileInput.click()" class="changePhoto">Изменить фото</button> -->
+        <label class="btn custom-input-btn" id="changedivPhoto">
+            <form action="#" method="GET" role="form" enctype="multipart/form-data">
+                <input type="file" name="photo" id="photo" style="display:none" accept="*">
+            </form>
+            <i class="changePhoto"></i> Изменить фото
+        </label>
+
+    </div>
+    <div class="divInfo">
+        <table>
+            <tr>
+                <th colspan="2"><h2 class="fontFIO" id="fontFIO"></h2><!-- Сюда вставить имя и фамилию--></th>
+            </tr>
+            <tr>
+                <th><h3>Дата рождения:</h3></th>
+                <th id="bdate"><!-- Здесь короче дата рождения из формы регистрации --></th>
+            </tr>
+            <tr>
+                <th><h3>Город:</h3></th>
+                <th id="city"><!-- Здесь короче информация, которая будет получена, когда пользователь редактирует профиль,
+                     там будет что-то типа заполнения анкеты--></th>
+            </tr>
+            <tr>
+                <th><h3>Спортивная школа:</h3></th>
+                <th id="school"><!-- Здесь тоже из анкеты --></th>
+            </tr>
+            <tr>
+                <th><h3>Спортивное звание:</h3></th>
+                <th id="rang"><!-- И здесь --></th>
+            </tr>
+            <tr>
+                <th><h3>Тренер:</h3></th>
+                <th id="trener"><!-- И здесь --></th>
+            </tr>
+            <tr>
+                <th><h3>О себе:</h3></th>
+                <th id="about"><!-- И здесь. Ограничение в 200 символов, чтобы описание было не слишком длинным--></th>
+            </tr>
+        </table>
+    </div>
+</div>
+</div>
+<div class="divButton" id="divButton">
+    <a href="./create_post.html" class="createPost">Добавить запись</a>
+</div>
+<!-- Пример записи-->
+
+<div id="posts_container"></div>
+</body>
+</html>

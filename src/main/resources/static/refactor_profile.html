@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="./scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="./scripts/edit_profile.js"></script>
+    <meta charset="UTF-8">
+    <title>Редактирование профиля</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Tahoma;
+            background-color: #D3E7E9;
+            margin: 0;
+        }
+
+        .colorNav {
+            background-color: #009999;
+        }
+
+        .colorFont {
+            color: #dddddd;
+        }
+
+        h1 {
+            cursor: help;
+            margin: 0;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            border-bottom: 3px solid #5200a5;
+            font-size: 20px;
+        }
+
+        .reg {
+            margin: 30px auto 0;
+            background: rgba(0, 186, 255, 0.77);
+            width: 370px;
+            height: 525px;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
+        }
+
+        .group {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        label {
+            padding-left: 10px;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+
+        .formR {
+            margin-top: 5px;
+            height: 30px;
+            width: 300px;
+            border-radius: 20px/20px;
+            border: none;
+            padding-left: 15px;
+            font-size: 18px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
+        }
+
+        .formR:focus {
+            border: 2px solid #6c00ff;
+            transform: translateX(15px);
+            width: 385px;
+        }
+
+        .registr {
+            margin-top: 5px;
+            height: 100%;
+            width: 300px;
+            border-radius: 20px/20px;
+            border: none;
+            padding-left: 15px;
+            font-size: 18px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
+        }
+
+        .registr:focus {
+            border: 2px solid #6c00ff;
+            transform: translateX(15px);
+            width: 385px;
+        }
+
+        .button {
+            cursor: pointer;
+            padding: 10px 30px;
+            height: 40px;
+            width: 170px;
+            color: #fff;
+            background: #5200a5;
+            border: none;
+            text-transform: uppercase;
+            font-size: 15px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.82);
+        }
+
+        button:hover {
+            opacity: .80;
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+<nav class="colorNav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./profile.html"><b class="colorFont">Моя страница</b></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./all_competitions.html" class="colorFont">Соревнования <span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="./my_competitions.html" class="colorFont">Мои соревнования</a></li>
+                <li><a href="./blog_post.html" class="colorFont">Блог</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" title="Введите фамилию спортсмена, которого хотите найти" class="form-control"
+                           placeholder="Введите фамилию">
+                </div>
+                <button type="submit" class="btn btn-default">Найти</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="colorFont">Выход</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./refactor_profile.html" class="colorFont">Редактировать профиль</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<form class="reg" method="POST" action="http://localhost:8080/api/setUserInfo" onsubmit="return false">
+    <h1 title="Создание поста">Редактирование профиля</h1>
+    <div class="group">
+        <label for="">Город:</label>
+        <input class="formR" type="text" id="city" required>
+    </div>
+    <div class="group">
+        <label for="">Спортивная школа:</label>
+        <input class="formR" type="text" id="school" required>
+    </div>
+    <div class="group">
+        <label for="">Спортивное звание:</label>
+        <input class="formR" type="text" id="rang">
+    </div>
+    <div class="group">
+        <label for="">Тренер:</label>
+        <input class="formR" type="text" id="trener">
+    </div>
+    <div class="group">
+        <label for="">О себе:</label>
+        <textarea class="registr" placeholder="Максимум 500 символов" id="about"></textarea>
+    </div>
+    <div class="group">
+        <center><input class="button" type="submit" value="Сохранить" onclick="save()"/></center>
+    </div>
+</form>
+</body>
+</html>

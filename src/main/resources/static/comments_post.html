@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат соревнований</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #D3E7E9;
+        }
+
+        th {
+            border: 0px;
+        }
+
+        .colorNav {
+            background-color: #009999;
+        }
+
+        .colorFont {
+            color: #dddddd;
+        }
+
+        th {
+            border: 1px solid black;
+            padding: 2px;
+        }
+
+        .chats {
+            height: 520px;
+            width: 60%;
+            margin-top: 30px;
+            margin-left: 20%;
+            border: 1px solid gray;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .nameChats {
+            height: 30px;
+            width: 100%;
+            border-bottom: 2px solid gray;
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-top: 7px;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .textMessage {
+            margin-top: 20px;
+            border-top: 2px solid gray;
+            width: 100%;
+            height: 40px;
+        }
+
+        textarea {
+            width: 80%;
+            height: 35px;
+            margin-left: 30px;
+            margin-top: 10px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        .btn-kek {
+            margin-top: -13px;
+            background-color: #009999;
+            color: white;
+        }
+
+        .dialogWindow {
+            height: 400px;
+            width: 100%;
+            overflow-x: -moz-scrollbars-none;
+            overflow-y: auto;
+        }
+
+        img {
+            height: 40px;
+            width: 40px;
+            border-radius: 30px;
+        }
+
+        .messageMembers {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .textMessageMembers {
+            margin-left: 50px;
+            margin-top: -35px;
+            border: 1px solid #86989B;
+            background-color: #dddddd;
+            width: 40%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .signature {
+            font-size: 8px;
+            color: gray;
+        }
+
+        .textMessageOrg {
+            margin-left: 50px;
+            margin-top: -35px;
+            border: 1px solid #86989B;
+            background-color: #FFCC00;
+            width: 50%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .messageMe {
+            margin-left: 92%;
+            margin-top: 20px;
+        }
+
+        .textMessageMe {
+            margin-left: -300px;
+            margin-top: -35px;
+            border: 1px solid #86989B;
+            background-color: #dddddd;
+            width: 480%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .textMessageMeOrg {
+            margin-left: -370px;
+            margin-top: -35px;
+            border: 1px solid #86989B;
+            background-color: #FFCC00;
+            width: 600%;
+            border-radius: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+<nav class="colorNav">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./profile.html"><b class="colorFont">Моя страница</b></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="./all_competitions.html" class="colorFont">Соревнования <span
+                        class="sr-only">(current)</span></a></li>
+                <li><a href="./my_competitions.html" class="colorFont">Мои соревнования</a></li>
+                <li><a href="./blog_post.html" class="colorFont">Блог</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" title="Введите фамилию спортсмена, которого хотите найти" class="form-control"
+                           placeholder="Введите фамилию">
+                </div>
+                <button type="submit" class="btn btn-default">Найти</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" class="colorFont">Выход</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./refactor_profile.html" class="colorFont">Редактировать профиль</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="chats">
+    <div class="nameChats">
+
+        <center><h2><b>Чат "<!-- Название соревнований --> Название соревнований"</b></h2></center>
+    </div>
+    <div class="dialogWindow">
+        <!-- Сообщение от создателя формы регистрации, то есть, от организатора-->
+        <div class="messageMembers">
+            <div><a href="#"><img src="pictures/nonamePhotoAvatar.jpg"/></a></div>
+            <div class="textMessageOrg">
+                Текст сообщения
+                <div class="signature">sent by <a href="#">organizer</a> at yyyy-mm-dd hh:mm:ss</div>
+            </div>
+        </div>
+
+        <!-- Сообщение от обычного участника диалога-->
+        <div class="messageMembers">
+            <div><a href="#"><img src="pictures/4/avatar.png"/></a></div>
+            <div class="textMessageMembers">
+                Текст сообщения
+                <div class="signature">sent by <a href="#">Firstname Lastname</a> at yyyy-mm-dd hh:mm:ss</div>
+            </div>
+        </div>
+
+        <!-- Сообщение от самого читателя -->
+        <div class="messageMe">
+            <div><img src="pictures/3/avatar.png"/></div>
+            <div class="textMessageMe">
+                Текст сообщения
+                <div class="signature">sent by me at yyyy-mm-dd hh:mm:ss</div>
+            </div>
+        </div>
+
+        <!-- Сообщение от читателя, если он организатор -->
+        <div class="messageMe">
+            <div><img src="pictures/3/avatar.png"/></div>
+            <div class="textMessageMeOrg">
+                Текст сообщения
+                <div class="signature">sent by me at yyyy-mm-dd hh:mm:ss</div>
+            </div>
+        </div>
+
+    </div>
+    <div class="textMessage">
+        <textarea placeholder="Ваше сообщение..."></textarea>
+        <button type="submit" class="btn btn-kek">Отправить</button>
+    </div>
+</div>
+<br>
+</body>
+</html>

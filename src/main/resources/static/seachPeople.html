@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск людей</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #D3E7E9;
+        }
+
+        .colorNav {
+            background-color: #009999;
+        }
+
+        .colorFont {
+            color: #dddddd;
+        }
+
+        .fontFIO {
+            font-size: 24px;
+            font-family: Tahoma;
+            font-weight: bold;
+        }
+
+        .formSearch {
+            margin-left: 230px;
+            margin-top: 20px;
+            width: 60%;
+            background-color: white;
+            border: 1px solid gray;
+            border-radius: 5px;
+            height: 180px;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .namePeople {
+            margin-left: 200px;
+            margin-top: -170px;
+        }
+
+        .infoSearch {
+            margin-left: 200px;
+        }
+
+        a {
+            color: #3B666B;
+        }
+
+        .kek {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<a>
+    <nav class="colorNav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./profile.html"><b class="colorFont">Моя страница</b></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="./all_competitions.html" class="colorFont">Соревнования <span
+                            class="sr-only">(current)</span></a></li>
+                    <li><a href="./my_competitions.html" class="colorFont">Мои соревнования</a></li>
+                    <li><a href="./blog_post.html" class="colorFont">Блог</a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" title="Введите фамилию спортсмена, которого хотите найти"
+                               class="form-control" placeholder="Введите фамилию">
+                    </div>
+                    <button type="submit" class="btn btn-default">Найти</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" class="colorFont">Выход</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./refactor_profile.html" class="colorFont">Редактировать профиль</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <a href="#">
+        <div class="formSearch">
+            <img src="pictures/3/avatar.png"/>
+            <div class="namePeople"><h2 class="fontFIO">Имя Фамилия</h2></div>
+            <br>
+            <div class="infoSearch">
+                <div class="kek">Город</div>
+                <div class="kek">Дата рождения</div>
+            </div>
+        </div>
+    </a>
+    </body>
+</html>
