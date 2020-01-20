@@ -22,19 +22,6 @@ public class MainController {
     private final static String response_f = "{\"response\":\"%s\"}";
 
 
-    /**
-     * POST http://examle.org:8080/api/registration
-     * <p>
-     * Регистрация пользователя
-     *
-     * @param firstName    - имя
-     * @param lastName     - фамилия
-     * @param middleName   - отчетсво
-     * @param birthday     - дата рождения
-     * @param passworduser - пароль
-     * @param emailuser    - мейл
-     * @return
-     */
     @PostMapping(value = "registration", produces = "application/json")
     public ResponseEntity<String> registration(@RequestParam(name = "firstName", defaultValue = "") String firstName,
                                                @RequestParam(name = "lastName", defaultValue = "") String lastName,
@@ -57,15 +44,7 @@ public class MainController {
         return new ResponseEntity<>(String.format(error_f, "Param can't be null!"), HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * POST http://examle.org:8080/api/login
-     * <p>
-     * Авторизация пользователя
-     *
-     * @param emailuser    - мейл
-     * @param passworduser - пароль
-     * @return
-     */
+
     @PostMapping(value = "login", produces = "application/json")
     public ResponseEntity<String> login(@RequestParam(name = "emailuser", defaultValue = "") String emailuser,
                                         @RequestParam(name = "passworduser", defaultValue = "") String passworduser) {
@@ -92,28 +71,12 @@ public class MainController {
     }
 
 
-    /**
-     * GET http://examle.org:8080/api/checkToken
-     * <p>
-     * Метод позволяет проверить токен на валидность.
-     * В случае успешной проверки, возвращает email пользователя данного токена
-     *
-     * @param token
-     * @return
-     */
+
     @GetMapping(value = "checkToken", produces = "application/json")
     public ResponseEntity<String> checkToken(@RequestParam(name = "token") String token) {
         return new ResponseEntity<>(String.format(response_f, CodingUtils.getTokenOwner(token)), HttpStatus.OK);
     }
 
-    /**
-     * GET http://examle.org:8080/api/getUserById/{id}
-     * <p>
-     * Метод позволяет получить данные пользователя в формате json
-     *
-     * @param id - id пользователя
-     * @return
-     */
     @GetMapping(value = "getUserById/{id}", produces = "application/json")
     public ResponseEntity<String> getUserById(@PathVariable(name = "id") int id) {
 
@@ -126,14 +89,6 @@ public class MainController {
         return new ResponseEntity<>(String.format(error_f, "No user!"), HttpStatus.BAD_REQUEST);
     }
 
-    /**
-     * GET http://examle.org:8080/api/getUserById/{id}
-     * <p>
-     * Метод позволяет получить данные пользователя в формате json
-     *
-     * @param token - токен пользователя
-     * @return
-     */
     @GetMapping(value = "getUser", produces = "application/json")
     public ResponseEntity<String> getUserById(@RequestParam(name = "token") String token, @RequestParam(name = "uid", defaultValue = "-1") int uid) {
         User user;
@@ -155,7 +110,7 @@ public class MainController {
     /**
      * PUT http://examle.org:8080/api/uploadAvatar
      * <p>
-     * Метод позволяет загрузить новый аватр пользователя
+     * Метод позволяет загрузить новый аватар пользователя
      *
      * @param body - json, в котором содержится токен пользователя и массив байтов - изображение
      *             принимает формат: {"token":"usertoken", "formData": [1,2,3]}
@@ -206,7 +161,7 @@ public class MainController {
             Integer id = new DBHelper().getUser(tokenOwner).getId();
             new DBHelper().setUserInfo(id, new UserInfo(city, school, rang, trener, about)).close();
 
-            return new ResponseEntity<>(String.format(response_f, "zaebis"), HttpStatus.OK);
+            return new ResponseEntity<>(String.format(response_f, "Good format!"), HttpStatus.OK);
         }
         return new ResponseEntity<>(String.format(error_f, "Param can't be null!"), HttpStatus.BAD_REQUEST);
 
@@ -226,7 +181,7 @@ public class MainController {
             Integer id = new DBHelper().getUser(tokenOwner).getId();
             new DBHelper().addPost(new Post(id, name, age, date, location, level, info)).close();
 
-            return new ResponseEntity<>(String.format(response_f, "zaebis"), HttpStatus.OK);
+            return new ResponseEntity<>(String.format(response_f, "Good format!"), HttpStatus.OK);
         }
         return new ResponseEntity<>(String.format(error_f, "Param can't be null!"), HttpStatus.BAD_REQUEST);
 
@@ -245,13 +200,13 @@ public class MainController {
     @PostMapping(value = "getPosts", produces = "application/json")
     public ResponseEntity<String> getPosts(@RequestParam(name = "token") String token, @RequestParam(name = "uid", defaultValue = "-1") int uid) {
         DBHelper dbHelper = new DBHelper();
-
+        String tokenOwner = CodingUtils.getTokenOwner(token);
+        int my_id = dbHelper.getUser(tokenOwner).getId();
         if(uid == -1){
-            String tokenOwner = CodingUtils.getTokenOwner(token);
-            uid = dbHelper.getUser(tokenOwner).getId();
+            uid = my_id;
         }
 
-        String s = new GsonBuilder().setPrettyPrinting().create().toJson(dbHelper.getPosts(uid));
+        String s = new GsonBuilder().setPrettyPrinting().create().toJson(dbHelper.getPosts(uid, my_id));
         dbHelper.close();
         return new ResponseEntity<>(s, HttpStatus.OK);
     }

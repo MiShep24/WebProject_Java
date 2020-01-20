@@ -325,7 +325,7 @@ public class DBHelper implements Closeable {
         return new ArrayList<>();
     }
 
-    public ArrayList<Post> getPosts(int uid) {
+    public ArrayList<Post> getPosts(int uid, int my_id) {
         try {
             PreparedStatement st = connection.prepareStatement("SELECT * FROM posts where uid=?");
             st.setInt(1, uid);
@@ -339,7 +339,7 @@ public class DBHelper implements Closeable {
                         resultSet.getString("name"), resultSet.getString("age"),
                         resultSet.getString("p_date"), resultSet.getString("location"),
                         resultSet.getString("level"), resultSet.getString("info"), members, getLikesCount(pid));
-                post.setMember(members.contains(uid));
+                post.setMember(members.contains(my_id));
                 posts.add(post);
             }
             close();
